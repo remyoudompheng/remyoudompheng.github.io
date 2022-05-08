@@ -1,6 +1,7 @@
 ---
 title: Mascarade
-parent: Writeups du DG'h4ck 2021
+parent: DG'h4ck 2021
+grand_parent: CTF writeups
 ---
 
 Le but est d'extraire la valeur en clair du flag, étant

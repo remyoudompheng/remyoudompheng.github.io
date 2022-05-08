@@ -1,5 +1,6 @@
 ---
-title: Writeups du DG'h4ck 2021
+title: DG'h4ck 2021
+parent: CTF writeups
 has_children: true
 ---
 
