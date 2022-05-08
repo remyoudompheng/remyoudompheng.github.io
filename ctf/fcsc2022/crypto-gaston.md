@@ -282,7 +282,6 @@ secret = E.decrypt(bytes.fromhex(crypt["enc"]))
 print(secret)
 ```
 
-
 Données
 ---
 

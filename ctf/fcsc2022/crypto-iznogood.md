@@ -80,6 +80,20 @@ class IZNOGOOD:
         s = self._S(s)
         s = self._addKey(s, self.nr)
         return self._n2b(s)
+
+if __name__ == "__main__":
+    KP = 1
+    flag = open("flag.txt", "rb").read()
+
+    k = os.urandom(16)
+    E = IZNOGOOD(k)
+
+    P = [ flag[i:i+16] for i in range(0, len(flag), 16) ]
+    C = [ E.encrypt(p) for p in P ]
+
+    for i in range(len(P)):
+        if i < KP: print(P[i].hex(), C[i].hex())
+        else:      print("?" * 32, C[i].hex())
 ```
 
 On nous donne également une paire clair/chiffré:
@@ -107,11 +121,11 @@ def _P(self, s):
         s[i] ^= sum
 ```
 
-On voit alors ue si un oracle nous donnait la valeur de `sum` pour
+On voit alors que si un oracle nous donnait la valeur de `sum` pour
 chacun des rounds, chaque élément de sortie ne dépendrait que de
-l'élément d'entrée au même endroit dans le tableau et dans les clés.
+l'élément d'entrée au même indice dans le tableau et dans les clés.
 On peut alors chercher les clés possibles éléments par éléments
-(il n'y a que 16 possibilités).
+(on doit explorer 16 possibilités, 32 fois, et non pas 2^128 clés).
 
 Comme les éléments sont sur 4 bits et qu'il y a 7 rounds de mélange,
 il n'y a que 2^28 possibilités pour ces 7 sommes: il suffit alors de

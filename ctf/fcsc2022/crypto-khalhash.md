@@ -32,6 +32,10 @@ et hachée avec la fonction `hash()` de Python. On sait que
 le hash des entiers est lui-même et la fonction de hash des tuples
 est définie dans le fichier source `Objects/tupleobject.c` de CPython.
 
+Fonction de hash des entiers: [Objects/longobject.c](https://github.com/python/cpython/blob/v3.9.12/Objects/longobject.c#L3043)
+
+Fonction de hash des tuples: [Objects/tupleobject.c](https://github.com/python/cpython/blob/v3.9.12/Objects/tupleobject.c#L330)
+
 Voici une traduction en Python:
 ```python
 P1 = 11400714785074694791
