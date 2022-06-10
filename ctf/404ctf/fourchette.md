@@ -26,6 +26,7 @@ Difficulté: Difficile
 ## Aperçu
 
 Comme le binaire est indiqué comme dangereux, on ne le lance pas.
+La dangerosité est probablement liée au `fork()` ?
 
 On peut l'ouvrir avec Ghidra pour avoir un aperçu de son contenu,
 on trouve facilement la fonction `main` qui donne ceci dans
