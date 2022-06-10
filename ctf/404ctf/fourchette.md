@@ -1,5 +1,5 @@
 ---
-title: Exploitation — Fourchette
+title: Reverse — Fourchette
 parent: 404 CTF (2022)
 grand_parent: CTF writeups
 ---
@@ -18,6 +18,10 @@ Maniez-le avec précaution !!
     
 Auteur : mh4ckt3mh4ckt1c4s#0705
 ```
+
+Catégorie: Rétro-ingénierie
+
+Difficulté: Difficile
 
 ## Aperçu
 
