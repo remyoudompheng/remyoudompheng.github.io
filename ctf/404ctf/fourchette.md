@@ -31,7 +31,7 @@ La dangerosité est probablement liée au `fork()` ?
 On peut l'ouvrir avec Ghidra pour avoir un aperçu de son contenu,
 on trouve facilement la fonction `main` qui donne ceci dans
 le décompilateur:
-```
+```c
   _Var1 = getpid();
   iVar2 = FUN_00101490(argc,argv,_Var1);
   rand();
@@ -57,7 +57,7 @@ le décompilateur:
 ```
 
 Et la fonction `showflag` (facile à identifier par son printf):
-```
+```c
   n2_ = n2;
   n1_ = n1;
   local_c = param_1;
@@ -116,7 +116,7 @@ Le flag chiffré est:
 
 Puisque les flags sont de la forme `404CTF{..}` il suffit de faire
 apparaître 404CTF:
-```
+```python
 enc = bytes.fromhex("""
 ffbdd25b 1dcdd9ef 934559dc d9e8b31c
 0d9ae8ce f5536ed7 e6ea8777 519df8c5

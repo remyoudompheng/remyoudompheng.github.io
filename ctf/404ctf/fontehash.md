@@ -1,5 +1,5 @@
 ---
-title: Cryptanalyse — Dégâts collatéraux
+title: Cryptanalyse — La fonte des hashs
 parent: 404 CTF (2022)
 grand_parent: CTF writeups
 ---
@@ -27,7 +27,7 @@ Difficulté: Difficile
 ## Description
 
 Le code fourni est un script Python un peu obfusqué:
-```
+```python
 import base64, codecs
 magic = 'IyEvdXNyL...'
 love = 'RjZQRkZGRa...'
@@ -42,14 +42,14 @@ eval(compile(base64.b64decode(eval('\x74\x72\x75\x73\x74')),'<string>','exec'))
 
 On peut reconstruire le script en vérifiant quelques choses dans un shell
 Python:
-```
+```python
 joy = "rot13"
 trust = magic + codecs.decode(love, joy) + god + codecs.decode(destiny, joy)
 print(base64.b64decode(trust).decoed())
 ```
 
 On obtient le script suivant:
-```
+```python
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys
@@ -144,7 +144,7 @@ elif len(sys.argv) >= 2 :
 Le script est encore un peu étrange: il fait des opérations sur des
 octets représentés sous forme de chaînes de 8 bits "0" ou "1".
 Remplaçons toutes ces opérations par des opérations "normales":
-```
+```python
 S = [0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76,
     0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0,
     0xb7, 0xfd, 0x93, 0x26, 0x36, 0x3f, 0xf7, 0xcc, 0x34, 0xa5, 0xe5, 0xf1, 0x71, 0xd8, 0x31, 0x15,
@@ -201,7 +201,7 @@ La phase 2 remplace chaque octet par son XOR avec le précédent.
 
 La phase 3 est une S-Box, qu'on peut facilement inverser.
 
-```
+```python
 Sinv = [S.index(i) for i in range(256)]
 
 import sys

@@ -58,7 +58,7 @@ réflecteurs, on arrive donc à 1.4 milliard de combinaisons.
 On utilise l'implémentation C++ pour la performance.
 
 Code de craquage:
-```
+```c++
   Rotor rot[5] = {
       Rotor::create("I", 'H', 'M'),   Rotor::create("II", 'E', 'C'),
       Rotor::create("III", 'T', 'U'), Rotor::create("IV", 'T', 'U'),
@@ -143,7 +143,7 @@ On voit alors que l'implémentation C++ a d'importants problèmes que l'on
 peut patcher.
 
 Éviter la boucle sur la liste d'encoches de taille 1:
-```
+```patch
 -	if (std::find(middle_rotor.notches.begin(),
 -	              middle_rotor.notches.end(),
 -	              alphabet.at(middle_rotor.position)) !=
@@ -152,19 +152,19 @@ peut patcher.
 ```
 
 Éviter de mettre le texte en majuscules (il l'est déjà):
-```
+```patch
 -	std::transform(plain.begin(), plain.end(), plain.begin(), ::toupper);
 +	//std::transform(plain.begin(), plain.end(), plain.begin(), ::toupper);
 ```
 
 Éviter une boucle pour transformer une lettre de l'alphabet en nombre:
-```
+```patch
 - alphabet.find(plain.at(i))
 + plain[i] - 'A'
 ```
 
 Éviter la hashmap dans la classe Plugboard:
-```
+```patch
  class Plugboard {
    public:
 -	std::unordered_map<char, char> permutations;

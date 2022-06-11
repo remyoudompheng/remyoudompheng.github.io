@@ -153,7 +153,7 @@ il faut donc trouver une technique pour exécuter une fonction arbitraire
 structures).
 
 Tous... non ? Certains pointeurs résistent à l'envahisseur:
-```
+```c
 /* Special file type for fopencookie function.  */
 struct _IO_cookie_file
 {
@@ -178,7 +178,7 @@ de la vtable `_IO_cookie_jumps` redirigent vers les pointeurs
 de fonctions, qu'on peut choisir à une valeur arbitraire.
 
 Mais ils sont "protégés":
-```
+```c
 static int
 _IO_cookie_close (_IO_FILE *fp)
 {
@@ -319,7 +319,7 @@ On va ensuite:
   overflow dans le hook de sortie
 
 Script final (après un peu d'optimisation pour compacter):
-```
+```python
 import sys
 from pwn import p32, p64, hexdump
 
