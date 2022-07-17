@@ -12,6 +12,8 @@ Points: 71
 
 Résolutions: 68
 
+First blood! 🩸
+
 ## Énoncé
 
 ```
@@ -57,11 +59,10 @@ calcul naïf: `(126/127)**12 = 0.909..`).
 
 ## Script solution
 
-```
+```python
 from telnetlib import Telnet
 from sage.all import Matrix, Zmod, lcm, GF
 
-#c = Telnet("07.cr.yp.toc.tf", 37313)
 c = Telnet("08.cr.yp.toc.tf", 37313)
 
 rows = []
@@ -84,7 +85,6 @@ while True:
         for f, mult in m.charpoly().factor():
             r = f.roots(GF(p**f.degree()))[0][0]
             r_order = r.multiplicative_order()
-            #result = lcm(result, p**f.degree() - 1)
             result = lcm(result, r_order)
         print(result)
         c.write(("%d\n" % result).encode())
