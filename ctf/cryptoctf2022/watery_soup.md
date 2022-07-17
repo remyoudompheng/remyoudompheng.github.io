@@ -6,7 +6,7 @@ grand_parent: CTF writeups
 
 {%- include mathjax.html -%}
 
-# Mino
+# Watery Soup
 
 Catégorie: medium-hard
 
