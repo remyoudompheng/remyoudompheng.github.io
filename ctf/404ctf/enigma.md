@@ -67,7 +67,7 @@ Code de craquage:
 
   Reflector refB = Reflector::create("B");
   Reflector refC = Reflector::create("C");
-  Plugboard plugboard{{}};
+  Plugboard plugboard{ {} };
 
   // 5*4*3 = 60 combinaisons.
   for (int i = 50; i < 60; i++) {
